@@ -1,7 +1,7 @@
 % S = find_subset_include(sub(k),sub); %  find those subsets that include sub(k)
 function Idx = find_subset_include (s0,sub)
 
-if(isempty(s0) | isempty(sub))
+if(isempty(s0) || isempty(sub))
     Idx = ones(1,length(sub));
 else
     Idx = zeros(1,length(sub));

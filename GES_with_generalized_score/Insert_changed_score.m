@@ -8,6 +8,11 @@ Paj = find(G(:,j)==1)'; % find the parents of Xj
 % the function local_score() calculates the local score
 tmp1=union(NA,T);
 tmp2=union(tmp1,Paj);
+
+if (size(tmp2)(1) != 1)
+  tmp2 = transpose(tmp2);
+end
+
 tmp3=union(tmp2,i);
 
 % before you calculate the local score, firstly you search in the
@@ -31,7 +36,7 @@ for r0 = 1:r
         end
     end
     
-    if(s1 & s2)
+    if(s1 && s2)
         break;
     end
 end

@@ -9,6 +9,8 @@ load example_data
 X=X-repmat(mean(X),size(X,1),1);
 X=X*diag(1./std(X));
 
+% X=X(:, 1:4);
+
 maxP = 5; % maximum number of parents when searching the graph
 parameters.kfold = 10; % 10 fold cross validation
 parameters.lambda = 0.01;

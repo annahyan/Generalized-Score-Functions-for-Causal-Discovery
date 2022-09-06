@@ -73,7 +73,7 @@ if(~isempty(PAi))
             Kpa_tr_te = Kpa(1:(kk-1)*n0,(kk-1)*n0+1:T);
             nv = T-(kk-1)*n0;
         end
-        if(kk<k & kk>1)
+        if(kk<k && kk>1)
             Kx_te = Kx((kk-1)*n0+1:kk*n0,(kk-1)*n0+1:kk*n0);
             Kx_tr = Kx([1:(kk-1)*n0,kk*n0+1:T],[1:(kk-1)*n0,kk*n0+1:T]);
             Kx_tr_te = Kx([1:(kk-1)*n0,kk*n0+1:T],(kk-1)*n0+1:kk*n0);
@@ -135,7 +135,7 @@ else
             Kx_tr_te = Kx(1:(kk-1)*n0,(kk-1)*n0+1:T);
             nv = T-(kk-1)*n0;
         end
-        if(kk<k & kk>1)
+        if(kk<k && kk>1)
             Kx_te = Kx((kk-1)*n0+1:kk*n0,(kk-1)*n0+1:kk*n0);
             Kx_tr = Kx([1:(kk-1)*n0,kk*n0+1:T],[1:(kk-1)*n0,kk*n0+1:T]);
             Kx_tr_te = Kx([1:(kk-1)*n0,kk*n0+1:T],(kk-1)*n0+1:kk*n0);

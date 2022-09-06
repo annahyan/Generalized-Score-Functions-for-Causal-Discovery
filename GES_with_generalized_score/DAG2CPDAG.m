@@ -28,7 +28,7 @@ while(size(edges_order,1)<M)
     for nx=1:N
         i=nodes_order(nx);
         if(~isempty(edges_order))
-            if(isempty(find(edges_order(:,2)==j & edges_order(:,1)==i)) & G(i,j)==1)
+            if(isempty(find(edges_order(:,2)==j && edges_order(:,1)==i)) & G(i,j)==1)
                 break;
             end
         else
