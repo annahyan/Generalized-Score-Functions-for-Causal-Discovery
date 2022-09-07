@@ -9,7 +9,6 @@ edges_order=[];
 % edges_order(M,:) is the edge which has the lowest order
 M=sum(G(:)); % the number of edges in this DAG
 N=size(G,1); % the number of nodes in this DAG
-
 while(size(edges_order,1)<M)
     for ny=N:-1:1
         j=nodes_order(ny);
@@ -28,7 +27,7 @@ while(size(edges_order,1)<M)
     for nx=1:N
         i=nodes_order(nx);
         if(~isempty(edges_order))
-            if(isempty(find(edges_order(:,2)==j && edges_order(:,1)==i)) & G(i,j)==1)
+            if(isempty(find(edges_order(:,2)==j & edges_order(:,1)==i)) && G(i,j)==1)
                 break;
             end
         else

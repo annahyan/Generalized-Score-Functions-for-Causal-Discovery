@@ -1,4 +1,3 @@
-
 % Greedy equivalence search
 function [Record] = GES(X,score_type,multi_sign,maxP,parameters)
     % INPUT:
@@ -25,7 +24,7 @@ function [Record] = GES(X,score_type,multi_sign,maxP,parameters)
       parameters.lambda = 0.01; % regularization parameter
     end
   end
-  if(score_type == 2 & multi_sign == 0) % negative marginal likelihood based on regression in RKHS
+  if(score_type == 2 && multi_sign == 0) % negative marginal likelihood based on regression in RKHS
     score_func = 'local_score_marginal_general';
     parameters = [];
   end
@@ -39,7 +38,7 @@ function [Record] = GES(X,score_type,multi_sign,maxP,parameters)
       end
     end
   end
-  if(score_type == 2 & multi_sign == 1) % negative marginal likelihood based on regression in RKHS
+  if(score_type == 2 && multi_sign == 1) % negative marginal likelihood based on regression in RKHS
     score_func = 'local_score_marginal_multi'; % for data with multi-variate dimensions
     if(nargin<5)
       for i = 1:size(X,2)
@@ -82,22 +81,21 @@ function [Record] = GES(X,score_type,multi_sign,maxP,parameters)
     min_desc={};
     for i=1:N
       for j=1:N
-	disp(i)
-        disp(j)
-        disp("nextiter")
-          
+	%%disp(i)
+        %%disp(j)
+        %%disp("nextiter")
+
         if (G(i,j)==0 & G(j,i)==0 & i~=j && length(find(G(:,j)==1))<=maxP)  % find a pair (Xi, Xj) that is not adjacent in the current graph , and restrict the number of parents
 	  Tj = find(G(j,:)==-1); % neighbors of Xj
           Ti = union(find(G(i,:)~=0),find(G(:,i)~=0)'); % adjacent to Xi
           NTi = setdiff(1:N,Ti);
-          T0 = intersect(Tj,NTi); % find the neighbours of Xj that are not adjacent to Xi
-				  % for any subset of T0
+          T0 = intersect(Tj,NTi); % find the neighbours of Xj that are not adjacent to Xi for any subset of T0
           [sub] = Combinatorial (T0); % find all the subsets for T0
           S = zeros(1,length(sub));
-			 % S indicate whether we need to check sub{k}.
-			 % 0: check both conditions.
-			 % 1: only check the first condition
-			 % 2: check nothing and is not valid.
+	  %% S indicate whether we need to check sub{k}.
+	  %% 0: check both conditions.
+	  %% 1: only check the first condition
+	  %% 2: check nothing and is not valid.
           for k=1:length(sub)
             if(S(k)<2) % S indicate whether we need to check subset(k)
               V1 = Insert_validity_test1(G,i,j,sub{k}); % Insert operator validation test:condition 1
@@ -130,7 +128,9 @@ function [Record] = GES(X,score_type,multi_sign,maxP,parameters)
     
     if(~isempty(min_desc))
       score_new = score+min_chscore;
+      # disp(score_new)
       if(score-score_new <= 0)
+	# disp("out1")
         break;
       end
       G = Insert(G,min_desc{1},min_desc{2},min_desc{3});
@@ -139,7 +139,10 @@ function [Record] = GES(X,score_type,multi_sign,maxP,parameters)
       G = DAG2CPDAG(G);
       G_step1{count1}=G;
     else
+      # disp("another_change:")
       score_new = score;
+      # disp(score_new)
+      # disp("out2")
       break;
     end
   end
@@ -159,7 +162,7 @@ function [Record] = GES(X,score_type,multi_sign,maxP,parameters)
     min_desc={};
     for i=1:N
       for j=1:N
-        if((G(i,j)==-1 | G(i,j)==1)) % if Xi - Xj or Xi -> Xj
+        if((G(i,j)==-1 || G(i,j)==1)) % if Xi - Xj or Xi -> Xj
           Hj = find(G(j,:)==-1); % neighbors of Xj
           Hi = union(find(G(i,:)~=0),find(G(:,i)~=0)'); % adjacent to Xi
           H0 = intersect(Hj,Hi); % find the neighbours of Xj that are adjacent to Xi
